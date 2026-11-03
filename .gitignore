@@ -25,3 +25,12 @@ venv/
 target/
 bin/
 obj/
+
+# Next.js / TypeScript
+/coverage
+.pnp
+.pnp.*
+.vercel
+*.pem
+*.tsbuildinfo
+next-env.d.ts
