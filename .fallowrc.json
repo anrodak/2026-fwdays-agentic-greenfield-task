@@ -1,0 +1,12 @@
+{
+  // fallow: dead code, duplication, complexity (https://fallow.tools/docs/).
+  // Runs after every code edit via .claude/hooks/fallow-check.sh.
+  "ignorePatterns": [
+    // Design-system reference implementations (DESIGN.md), not app code
+    "docs/**"
+  ],
+  "ignoreDependencies": [
+    // Referenced by name as a Turbopack CSS loader in next.config.ts, never imported
+    "@tailwindcss/turbopack"
+  ]
+}

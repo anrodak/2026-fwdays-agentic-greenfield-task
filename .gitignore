@@ -34,3 +34,6 @@ obj/
 *.pem
 *.tsbuildinfo
 next-env.d.ts
+
+# fallow cache
+.fallow/
