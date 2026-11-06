@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geologica, Onest } from "next/font/google";
+import { FooterJoke } from "@/components/footer-joke";
 import "./globals.css";
 
 // DESIGN.md › Type: Geologica for display numbers and the headline, Onest for text.
@@ -26,7 +27,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="uk"
       className={`${geologica.variable} ${onest.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        {children}
+        <footer className="mt-auto px-4 py-8 text-center">
+          <FooterJoke />
+        </footer>
+      </body>
     </html>
   );
 }
