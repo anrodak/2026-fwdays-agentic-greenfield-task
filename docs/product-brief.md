@@ -51,7 +51,8 @@ they came to make.
    view is shareable (FR-SEARCH-03). Pressing Enter on a lone suggestion selects
    it (FR-SEARCH-04). If nothing matches, an inline "Nothing found" appears —
    never an error toast (FR-SEARCH-05). Alternatively, the visitor clicks
-   anywhere on the map to set the place by reverse-geocoding (FR-MAP-03).
+   anywhere on the map to set the place by its coordinates; Open-Meteo has no
+   reverse geocoding, so the point is labeled by rounded coordinates (FR-MAP-03).
 3. **Read the forecast.** Once a location is active, the app fetches a 7-day
    daily forecast (FR-FORECAST-01) and renders seven day cards — weekday, hi/lo
    in °C, weather icon, precipitation probability, wind (FR-FORECAST-02). Below
@@ -67,8 +68,8 @@ they came to make.
    Sunday average, by the location's local dates) is highlighted at the top of
    the grid — the headline answer to "is it worth going?" (FR-COMFORT-05).
 5. **See it in place.** An interactive OpenStreetMap-tiled map is bounded to the
-   current location, with a marker and a popup naming the city
-   (FR-MAP-01/02). "© OpenStreetMap contributors" attribution is always shown
+   current location, with a marker and a popup naming the city, or showing the
+   rounded coordinates of a clicked point (FR-MAP-01/02/03). "© OpenStreetMap contributors" attribution is always shown
    (FR-MAP-04), and the map is client-only with a same-footprint skeleton during
    SSR (FR-MAP-05).
 6. **Feel the weather.** A calm animated background reflects the current
@@ -89,8 +90,8 @@ they came to make.
   hourly chart and the map, and decide. This is the core loop and the whole MVP
   supports it.
 - **Set the place by map.** Instead of typing, the visitor clicks the map; the
-  app reverse-geocodes the point, makes it the active location, and re-fetches
-  everything. Useful when the visitor knows roughly where on the map they want to
+  app makes the clicked point the active location, labels it by rounded
+  coordinates, and re-fetches everything. Useful when the visitor knows roughly where on the map they want to
   go but not the exact city name.
 - **Share a view.** Because the active location lives in the URL, a visitor can
   copy the link and send it; the recipient opens the same place with no setup and

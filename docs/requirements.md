@@ -115,8 +115,8 @@
 
 | ID | Phase | Area | Description |
 |---|---|---|---|
-| TC-STACK-01 | MVP | Technical | Next.js 16.2 App Router; TypeScript strict; React 19.2. |
-| TC-STACK-02 | MVP | Technical | Tailwind CSS 4 (PostCSS plugin); shadcn/ui base-nova; class-variance-authority. |
+| TC-STACK-01 | MVP | Technical | Next.js 16.4 App Router; TypeScript strict; React 19.3. (Amended 2026-11-06 to match the create-next-app scaffold; originally Next.js 16.2 and React 19.2.) |
+| TC-STACK-02 | MVP | Technical | Tailwind CSS 4 (Turbopack loader `@tailwindcss/turbopack`); shadcn/ui base-nova; class-variance-authority. (Amended 2026-11-06 to match the create-next-app scaffold; originally the PostCSS plugin.) |
 | TC-STACK-03 | MVP | Technical | Open-Meteo APIs (forecast + geocoding); no other weather provider. |
 | TC-STACK-04 | MVP | Technical | Leaflet + react-leaflet for maps; OSM raster tiles only. |
 | TC-STACK-05 | MVP | Technical | Vitest for unit tests on `lib/`; automated E2E recording + requirement validation via headless Playwright (`@playwright/test`, `e2e/`), recorded as video and guarded by `check-recordings` (amended 2026-06-22 by user decision, ADR-0006; originally specified the chrome-devtools MCP without Playwright). |
@@ -150,7 +150,7 @@ for clarification (see the batched clarification list in the analyst handoff).
   MVP scope with these resolutions:
   - **Weekend-compare is MVP.** The PRD marked `weekend-compare`
     (`FR-COMPARE-01/02/03`) "optional"; the user promoted it to a core MVP slice.
-    All 32 FRs are now `MVP`.
+    All 33 FRs are now `MVP`.
   - **Theme = system preference + indicator, no manual toggle.** FR-SHELL-01's
     "theme indicator" reflects the OS light/dark preference; NFR-A11Y-02's AA
     contrast holds in both themes. No theme-toggle control ships in the MVP
@@ -167,11 +167,11 @@ for clarification (see the batched clarification list in the analyst handoff).
 - **Keyless / no-DB / no-auth stack (ADR-0001).** The app is database-free,
   auth-free, email-free. All weather/geo data comes from the keyless Open-Meteo
   forecast + geocoding APIs; there is no persistence, no accounts, no server
-  secrets. Pinned cities (the Future weekend-compare feature) would be
-  client-only state. The runtime needs zero env vars.
+  secrets. Pinned cities (weekend-compare, promoted to MVP at Checkpoint 1)
+  are client-only state. The runtime needs zero env vars.
 - **"Weekend"** is assumed to mean the upcoming Saturday + Sunday relative to the
   **active location's** local calendar date (consistent with FR-COMFORT-05 and
-  the day-bound rules in AGENTS.md), not the visitor's own clock.
+  DESIGN.md, which keys times to the selected place), not the visitor's own clock.
 - **Geographic scope** is assumed worldwide — any city reachable via Open-Meteo
   geocoding. The PRD names no regional restriction.
 - **Temperature units** are °C only for the MVP (the PRD uses °C throughout); no
@@ -181,14 +181,14 @@ for clarification (see the batched clarification list in the analyst handoff).
   switcher are implied for the MVP.
 - **Theme.** The PRD specifies a theme *indicator* (FR-SHELL-01) and AA contrast
   across both light and dark themes (NFR-A11Y-02), but no explicit theme-toggle
-  FR. A light/dark *toggle* is therefore treated as not-in-scope pending
-  clarification; the indicator is assumed to reflect system preference. The
+  FR. A light/dark *toggle* is therefore out of scope (confirmed at Checkpoint 1,
+  see above); the indicator reflects the system preference. The
   animated day/night background (FR-ANIM-01/02) is condition-driven by the active
   location's sunrise/sunset and is independent of the UI theme.
 - **Error surface.** On Open-Meteo unreachability or network error, the assumed
   behavior is an inline, calm error state with a retry affordance — never a
   generic 500 and never a silent blank (consistent with NFR-OBS-01 and the
-  correctness rules in AGENTS.md). This generalizes the explicit FR-SEARCH-05
+  StatusMessage rules in DESIGN.md). This generalizes the explicit FR-SEARCH-05
   "Nothing found, no toast" rule to all external calls.
 - **Hourly chart** is assumed to plot the next 48 hours of hourly points
   (FR-FORECAST-03). **Map default zoom** is assumed at roughly city level
